@@ -1,13 +1,14 @@
 <?php
 
 	/**
-	 * Plugin Name: NOX | Disable WP Rocket Cache
+	 * Plugin Name: Disable WP Rocket Cache
 	 * Description: Disables WP Rocket’s page cache while preserving other optimization features. In order to enable the funcionality, use the constant NOX_DISABLE_ROCKET_CACHE with true
 	 * Plugin URI:  https://github.com/nox-it/wp-nox-disable-rocket-cache
-	 * Author:      Jonatas Sas
-	 * Author URI:  https://www.jsas.com.br/
+	 * Author:      NOX IT
+	 * Author URI:  https://github.com/nox-it
 	 * License:     GNU General Public License v2 or later
 	 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+	 * Version:     1.0.0
 	 */
 
 	defined( 'ABSPATH' ) or die();

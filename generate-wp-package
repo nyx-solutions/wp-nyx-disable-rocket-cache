@@ -1,0 +1,44 @@
+#!/usr/bin/env php
+<?php
+
+    $config = json_decode(file_get_contents(__DIR__.'/plugin.json'), true);
+
+    if (extension_loaded('zip') && isset($config['id'], $config['filelist']) && is_array($config['filelist']) && count($config['filelist']) > 0) {
+        $zip     = new ZipArchive();
+        $zipFile = __DIR__ . "/{$config['id']}.zip";
+
+        if (is_file($zipFile)) {
+            unlink($zipFile);
+
+            if (is_file($zipFile)) {
+                echo "Please remove the zip file: {$zipFile}";
+
+                exit(1);
+            }
+        }
+
+        $filelist = array_map(
+            function ($file) {
+                return ['name' => "/{$file}", 'path' => __DIR__."/{$file}"];
+            },
+            $config['filelist']
+        );
+
+        if ($zip->open($zipFile, ZipArchive::CREATE) === true) {
+            foreach ($filelist as $file) {
+                $zip->addFile($file['path'], $file['name']);
+            }
+
+            $zip->close();
+
+            if (is_file($zipFile)) {
+                echo "Package created at {$zipFile}!";
+
+                exit(0);
+            }
+        }
+    }
+
+    echo "Package not created!";
+
+    exit(1);
