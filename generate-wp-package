@@ -3,13 +3,14 @@
 
     $config = json_decode(file_get_contents(__DIR__.'/plugin.json'), true);
 
-    if (extension_loaded('zip') && isset($config['id'], $config['filelist']) && is_array($config['filelist']) && count($config['filelist']) > 0) {
+    if (isset($config['id'], $config['filelist']) && is_array($config['filelist']) && count($config['filelist']) > 0 && extension_loaded('zip')) {
         $zip     = new ZipArchive();
         $zipFile = __DIR__ . "/{$config['id']}.zip";
 
         if (is_file($zipFile)) {
             unlink($zipFile);
 
+            /** @noinspection NotOptimalIfConditionsInspection */
             if (is_file($zipFile)) {
                 echo "Please remove the zip file: {$zipFile}";
 
@@ -18,7 +19,7 @@
         }
 
         $filelist = array_map(
-            function ($file) {
+            static function ($file) {
                 return ['name' => "/{$file}", 'path' => __DIR__."/{$file}"];
             },
             $config['filelist']

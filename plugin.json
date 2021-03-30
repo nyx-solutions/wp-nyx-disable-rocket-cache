@@ -1,7 +1,7 @@
 {
-  "id": "wp-nox-disable-rocket-cache",
+  "id": "wp-nyx-disable-rocket-cache",
   "filelist": [
-    "wp-nox-disable-rocket-cache.php",
+    "wp-nyx-disable-rocket-cache.php",
     "readme.txt"
   ]
 }
